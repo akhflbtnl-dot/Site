@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>مسابقات فرهنگی هنری - مدرسه مبین</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+    body {
+        background: linear-gradient(135deg, #1a237e 0%, #311b92 25%, #4a148c 50%, #880e4f 100%);
+        background-size: 400% 400%;
+        animation: gradientBG 20s ease infinite;
+        color: white;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        overflow-x: hidden;
+    }
+    
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    
+    .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 10px;
+        position: relative;
+        z-index: 10;
+    }
+    
+    .floating-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        overflow: hidden;
+    }
+    
+    .floating-element {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.05);
+        animation: float 20s infinite linear;
+    }
+    
+    @keyframes float {
+        0% { transform: translateY(100vh) rotate(0deg); }
+        100% { transform: translateY(-100px) rotate(360deg); }
+    }
+    
+    .header {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    
+    .title {
+        font-size: 2.2rem;
+        font-weight: 900;
+        text-shadow: 0 0 15px rgba(255, 235, 59, 0.8);
+        margin-bottom: 8px;
+        animation: titleGlow 3s ease-in-out infinite alternate;
+        color: #ffeb3b;
+        line-height: 1.2;
+    }
+    
+    @keyframes titleGlow {
+        from { 
+            text-shadow: 0 0 8px #ffeb3b, 0 0 15px #ff9800;
+            transform: scale(1);
+        }
+        to { 
+            text-shadow: 0 0 15px #ffeb3b, 0 0 25px #ff5722;
+            transform: scale(1.02);
+        }
+    }
+    
+    .subtitle {
+        font-size: 1.2rem;
+        color: #e1f5fe;
+        margin-bottom: 20px;
+        animation: fadeInUp 1s ease-out;
+    }
+    
+    .team-container {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin: 20px 0;
+    }
+    
+    .team-member {
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 10px;
+        padding: 15px;
+        width: 100%;
+        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        animation: fadeInUp 0.8s ease-out forwards;
+        opacity: 0;
+    }
+    
+    .team-member:nth-child(1) { animation-delay: 0.2s; }
+    .team-member:nth-child(2) { animation-delay: 0.4s; }
+    .team-member:nth-child(3) { animation-delay: 0.6s; }
+    
+    .team-member:active {
+        transform: translateY(-3px) scale(1.02);
+        background: rgba(255, 255, 255, 0.12);
+        border-color: #ff9800;
+    }
+    
+    .member-icon {
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+        color: #ff9800;
+        text-align: center;
+    }
+    
+    .member-name {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 4px;
+        color: #ffeb3b;
+        text-align: center;
+    }
+    
+    .member-role {
+        font-size: 0.9rem;
+        color: #b3e5fc;
+        margin-bottom: 6px;
+        padding-bottom: 6px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+    }
+    
+    .member-desc {
+        font-size: 0.8rem;
+        color: #e1f5fe;
+        text-align: center;
+    }
+    
+    .school-info {
+        font-size: 1.1rem;
+        margin: 15px 0;
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 10px;
+        border-right: 3px solid #ff9800;
+        animation: fadeInUp 1s ease-out;
+        text-align: center;
+    }
+    
+    .start-button {
+        background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
+        border: none;
+        color: white;
+        font-size: 1.3rem;
+        font-weight: 700;
+        padding: 15px 30px;
+        border-radius: 40px;
+        cursor: pointer;
+        margin: 15px auto;
+        display: block;
+        width: 100%;
+        max-width: 280px;
+        box-shadow: 0 8px 15px rgba(255, 87, 34, 0.3);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        animation: pulse 2s infinite;
+        touch-action: manipulation;
+    }
+    
+    @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(255, 152, 0, 0.7); }
+        70% { box-shadow: 0 0 0 12px rgba(255, 152, 0, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(255, 152, 0, 0); }
+    }
+    
+    .start-button:active {
+        transform: scale(0.96);
+        box-shadow: 0 4px 10px rgba(255, 87, 34, 0.4);
+    }
+    
+    .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #1a237e 0%, #311b92 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s, visibility 0.5s;
+    }
+    
+    .loading-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .loading-text {
+        font-size: 1.5rem;
+        margin-bottom: 25px;
+        color: #ffeb3b;
+        text-shadow: 0 0 8px rgba(255, 235, 59, 0.7);
+        text-align: center;
+        padding: 0 20px;
+    }
+    
+    .loading-container {
+        width: 100px;
+        height: 100px;
+        position: relative;
+        margin-bottom: 25px;
+    }
+    
+    .loading-circle {
+        width: 100%;
+        height: 100%;
+        border: 3px solid transparent;
+        border-top-color: #ff5722;
+        border-radius: 50%;
+        animation: spin 1.5s linear infinite;
+        position: absolute;
+    }
+    
+    .loading-circle:nth-child(2) {
+        border-top-color: #ffeb3b;
+        animation-delay: 0.2s;
+        width: 80%;
+        height: 80%;
+        top: 10%;
+        left: 10%;
+    }
+    
+    .loading-circle:nth-child(3) {
+        border-top-color: #4caf50;
+        animation-delay: 0.4s;
+        width: 60%;
+        height: 60%;
+        top: 20%;
+        left: 20%;
+    }
+    
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(15px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @media (min-width: 768px) {
+        .container {
+            max-width: 700px;
+            padding: 20px;
+        }
+        
+        .title {
+            font-size: 3rem;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+        }
+        
+        .team-container {
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .team-member {
+            width: calc(50% - 8px);
+            max-width: 220px;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px) scale(1.02);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: #ff9800;
+        }
+        
+        .start-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(255, 87, 34, 0.4);
+        }
+        
+        .start-button:active {
+            transform: scale(0.96);
+        }
+    }
+    
+    @media (min-width: 1024px) {
+        .container {
+            max-width: 800px;
+        }
+        
+        .team-member {
+            width: calc(33.333% - 12px);
+            max-width: 240px;
+        }
+        
+        .title {
+            font-size: 3.5rem;
+        }
+    }
+    
+    @media (max-height: 600px) and (orientation: landscape) {
+        .container {
+            padding: 5px;
+        }
+        
+        .team-container {
+            flex-direction: row;
+            margin: 10px 0;
+            gap: 8px;
+        }
+        
+        .team-member {
+            padding: 10px;
+        }
+        
+        .title {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        
+        .school-info {
+            font-size: 0.9rem;
+            margin: 10px 0;
+            padding: 8px;
+        }
+        
+        .start-button {
+            font-size: 1.1rem;
+            padding: 12px 25px;
+            margin: 10px auto;
+            max-width: 200px;
+        }
+    }
+    
+    @supports not (backdrop-filter: blur(10px)) {
+        .team-member, .school-info {
+            background: rgba(40, 40, 80, 0.9);
+        }
+    }
+    
+    .no-scroll {
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+</head>
+<body>
+    <div class="floating-bg" id="floatingBg"></div>
+<div class="container">
+    <div class="header">
+        <h1 class="title">DRIVE MAD</h1>
+        <h2 class="subtitle">مسابقات فرهنگی هنری</h2>
+    </div>
+    
+    <div class="team-container">
+        <div class="team-member">
+            <div class="member-icon">
+                <i class="fas fa-code"></i>
+            </div>
+            <h3 class="member-name">علی اخلاقی</h3>
+            <p class="member-role">برنامه نویس</p>
+        </div>
+        
+        <div class="team-member">
+            <div class="member-icon">
+                <i class="fas fa-laptop-code"></i>
+            </div>
+            <h3 class="member-name">سجاد علوی مقدم</h3>
+            <p class="member-role">برنامه نویس</p>
+        </div>
+        
+        <div class="team-member">
+            <div class="member-icon">
+                <i class="fas fa-palette"></i>
+            </div>
+            <h3 class="member-name">منتظری</h3>
+            <p class="member-role">طراح گرافیک</p>
+        </div>
+    </div>
+    
+    <div class="school-info">
+        مدرسه دوره دوم نمونه دولتی مبین
+    </div>
+    
+    <button class="start-button" id="startButton">
+        <i class="fas fa-play" style="margin-left: 8px;"></i>
+        شروع!
+    </button>
+</div>
+
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-text">در حال انتقال به صفحه اصلی</div>
+    <div class="loading-container">
+        <div class="loading-circle"></div>
+        <div class="loading-circle"></div>
+        <div class="loading-circle"></div>
+    </div>
+</div>
+
+<script>
+    const floatingBg = document.getElementById('floatingBg');
+    const colors = [
+        'rgba(255, 235, 59, 0.06)',
+        'rgba(33, 150, 243, 0.06)', 
+        'rgba(76, 175, 80, 0.06)',
+        'rgba(255, 87, 34, 0.06)'
+    ];
+    
+    for (let i = 0; i < 6; i++) {
+        const element = document.createElement('div');
+        element.classList.add('floating-element');
+        
+        const size = Math.random() * 50 + 15;
+        element.style.width = `${size}px`;
+        element.style.height = `${size}px`;
+        
+        element.style.left = `${Math.random() * 100}%`;
+        element.style.top = `${Math.random() * 100 + 100}%`;
+        
+        element.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        
+        const duration = Math.random() * 25 + 20;
+        const delay = Math.random() * 5;
+        element.style.animationDuration = `${duration}s`;
+        element.style.animationDelay = `${delay}s`;
+        
+        floatingBg.appendChild(element);
+    }
+    
+    const startButton = document.getElementById('startButton');
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    const body = document.body;
+    
+    function redirectToIndex() {
+        window.location.href = 'index.html';
+    }
+    
+    startButton.addEventListener('click', function() {
+        loadingOverlay.classList.add('active');
+        body.classList.add('no-scroll');
+        
+        setTimeout(function() {
+            redirectToIndex();
+        }, 3000);
+    });
+    
+    loadingOverlay.addEventListener('click', function() {
+        redirectToIndex();
+    });
+    
+    window.addEventListener('load', function() {
+        document.querySelector('.title').style.animation = 'titleGlow 3s ease-in-out infinite alternate';
+        document.querySelector('.subtitle').style.animation = 'fadeInUp 1s ease-out forwards';
+        document.querySelector('.school-info').style.animation = 'fadeInUp 1.2s ease-out forwards';
+        
+        const teamMembers = document.querySelectorAll('.team-member');
+        teamMembers.forEach((member, index) => {
+            member.style.animation = `fadeInUp 0.8s ease-out ${0.2 + index * 0.2}s forwards`;
+        });
+    });
+    
+    document.addEventListener('touchstart', function(e) {
+        if (e.touches.length > 1) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+    
+    let touchStartY = 0;
+    
+    startButton.addEventListener('touchstart', function(e) {
+        touchStartY = e.touches[0].clientY;
+        this.style.transform = 'scale(0.96)';
+    }, { passive: true });
+    
+    startButton.addEventListener('touchend', function(e) {
+        this.style.transform = '';
+    }, { passive: true });
+    
+    startButton.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+            e.preventDefault();
+            this.click();
+        }
+    });
+    
+    startButton.setAttribute('tabindex', '0');
+</script>
+</body>
+</html>
